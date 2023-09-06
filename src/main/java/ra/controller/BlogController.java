@@ -33,9 +33,9 @@ public class BlogController {
     @PostMapping
     public ResponseEntity<Blog> add(@RequestBody Blog blog) {
         blog.setId(null);
-        Blog blog1 = blogService.save(blog);
-
-        return new ResponseEntity<>(blog1, HttpStatus.CREATED);
+        blogService.save(blog);
+        Blog blog1 = blogService.findById(blog.getId());
+        return new ResponseEntity<>(blog1, HttpStatus.OK);
     }
 
 
