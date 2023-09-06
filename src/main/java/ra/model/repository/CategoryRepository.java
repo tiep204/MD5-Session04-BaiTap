@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import ra.model.entity.Blog;
 import ra.model.entity.Category;
 
 import java.util.List;
@@ -16,5 +17,4 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     @Query(value = "SELECT c.* FROM category c INNER JOIN cate_blog cb ON c.id = cb.category_id WHERE cb.blog_id = :blogId", nativeQuery = true)
     List<Category> findCategoriesByBlogId(@Param("blogId") Long blogId);
-
 }

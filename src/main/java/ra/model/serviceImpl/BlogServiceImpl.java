@@ -30,4 +30,9 @@ public class BlogServiceImpl implements BlogService {
     public Blog findById(Long id) {
         return blogRepository.findById(id).get();
     }
+
+    @Override
+    public List<Blog> findAllByBlogByCategoryId(Long catId) {
+        return blogRepository.findAllByBlogByCategoryId(catId);
+    }
 }

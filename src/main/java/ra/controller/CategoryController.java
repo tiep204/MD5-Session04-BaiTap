@@ -7,7 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ra.model.entity.Blog;
 import ra.model.entity.Category;
+import ra.model.service.BlogService;
 import ra.model.service.CategoryService;
 
 import java.util.List;
@@ -17,6 +19,8 @@ import java.util.List;
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private BlogService blogService;
 
     @GetMapping("")
     public ResponseEntity<List<Category>> findAll() {
@@ -59,5 +63,10 @@ public class CategoryController {
         category.setId(id);
         Category categoryUpp= categoryService.save(category);
         return new ResponseEntity<>(categoryUpp,HttpStatus.CREATED);
+    }
+    @GetMapping("/cat/{id}")
+    public ResponseEntity<List<Blog>> findByCategoryId(@PathVariable Long id){
+        List<Blog> blogList = blogService.findAllByBlogByCategoryId(id);
+        return new ResponseEntity<>(blogList,HttpStatus.OK);
     }
 }
